@@ -1,7 +1,7 @@
 PATH  := node_modules/.bin:$(PATH)
 SHELL := /bin/bash
 
-source_files := src/ti-auth.js $(wildcard src/lib/*.js)
+source_files := src/ti-auth.js $(wildcard src/lib/*.js) $(wildcard src/lib/**/*.js)
 build_files := $(source_files:%.js=build/%.js)
 app := build/ti-auth.js
 
