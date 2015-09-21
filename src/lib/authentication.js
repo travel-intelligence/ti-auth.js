@@ -1,15 +1,20 @@
-import url from 'url';
+import location from './location';
 
-var AUTH_TOKEN;
+let AUTH_TOKEN;
 
-export function authorize() {
-  let uri = url.parse(global.location, true);
-  AUTH_TOKEN = uri.query.auth_token || undefined;
+export default {
+  token() {
+    return AUTH_TOKEN;
+  },
+  authorize() {
+    let uri = location.parse();
+    AUTH_TOKEN = uri.query.auth_token || undefined;
 
-  if (!AUTH_TOKEN) { return false; }
+    if (!AUTH_TOKEN) { return false; }
 
-  delete uri.query.auth_token;
-  global.history.replaceState({}, '', url.format(uri));
+    delete uri.query.auth_token;
+    location.replace(uri);
 
-  return true;
-}
+    return true;
+  }
+};
