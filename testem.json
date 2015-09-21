@@ -7,7 +7,7 @@
   ],
   "launchers": {
     "Mocha": {
-      "command": "./node_modules/.bin/mocha -R tap build/test/*_test.js",
+      "command": "./node_modules/.bin/mocha -R tap build/tests.js",
       "protocol": "tap"
     }
   },

@@ -1,11 +1,11 @@
 PATH  := node_modules/.bin:$(PATH)
 SHELL := /bin/bash
 
-source_files := src/ti-auth.js $(wildcard src/lib/*.js) $(wildcard src/lib/**/*.js)
+source_files := src/ti-auth.js $(wildcard src/lib/*.js)
 build_files := $(source_files:%.js=build/%.js)
 app := build/ti-auth.js
 
-test_source := $(wildcard test/*.js)
+test_source := $(wildcard test/lib/*.js)
 test_build := $(test_source:%.js=build/%.js)
 tests := build/tests.js
 
@@ -21,7 +21,7 @@ $(app): $(build_files)
 	browserify $< -o $@
 
 $(tests): $(test_build)
-	browserify $< -o $@
+	browserify $^ -o $@
 
 watch: $(source_files) $(test_source)
 	chokidar $^ --silent -c "make"
