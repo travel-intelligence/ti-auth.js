@@ -1,11 +1,12 @@
 {
   "framework": "mocha",
   "src_files": [
+    "node_modules/chai/chai.js",
     "build/tests.js"
   ],
   "launchers": {
     "Mocha": {
-      "command": "./node_modules/.bin/mocha -R tap build/tests.js",
+      "command": "./node_modules/.bin/mocha -R tap build/test/*_test.js",
       "protocol": "tap"
     }
   },
