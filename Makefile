@@ -2,25 +2,25 @@ PATH  := node_modules/.bin:$(PATH)
 SHELL := /bin/bash
 
 source_files := src/ti-auth.js $(wildcard src/lib/*.js)
-dist_files := $(source_files:%.js=dist/%.js)
-app := dist/ti-auth.js
+build_files := $(source_files:%.js=build/%.js)
+app := build/ti-auth.js
 
 test_source := $(wildcard test/*.js)
-test_dist := $(test_source:%.js=dist/%.js)
-tests := dist/tests.js
+test_build := $(test_source:%.js=build/%.js)
+tests := build/tests.js
 
 .PHONY: all watch test clean
 
 all: $(app) $(tests)
 
-dist/%.js: %.js
+build/%.js: %.js
 	mkdir -p $(dir $@)
 	babel $< -o $@
 
-$(app): $(dist_files)
+$(app): $(build_files)
 	browserify $< -o $@
 
-$(tests): $(test_dist)
+$(tests): $(test_build)
 	browserify $< -o $@
 
 watch: $(source_files) $(test_source)
@@ -30,4 +30,4 @@ test: all
 	testem
 
 clean:
-	rm -rf dist
+	rm -rf build
