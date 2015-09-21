@@ -3,21 +3,31 @@ SHELL := /bin/bash
 
 source_files := src/ti-auth.js $(wildcard src/lib/*.js)
 dist_files := $(source_files:%.js=dist/%.js)
-bundle := dist/ti-auth.js
+app := dist/ti-auth.js
 
-.PHONY: all watch clean
+test_source := $(wildcard test/*.js)
+test_dist := $(test_source:%.js=dist/%.js)
+tests := dist/tests.js
 
-all: $(bundle)
+.PHONY: all watch test clean
+
+all: $(app) $(tests)
 
 dist/%.js: %.js
 	mkdir -p $(dir $@)
 	babel $< -o $@
 
-$(bundle): $(dist_files)
+$(app): $(dist_files)
 	browserify $< -o $@
 
-watch:
-	chokidar $(source_files) --silent -c "make"
+$(tests): $(test_dist)
+	browserify $< -o $@
+
+watch: $(source_files) $(test_source)
+	chokidar $^ --silent -c "make"
+
+test: all
+	testem
 
 clean:
 	rm -rf dist
