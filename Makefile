@@ -5,7 +5,7 @@ source_files := src/ti-auth.js $(wildcard src/lib/*.js)
 build_files := $(source_files:%.js=build/%.js)
 app := build/ti-auth.js
 
-test_source := $(wildcard test/lib/*.js)
+test_source := test/ti-auth.js $(wildcard test/lib/*.js)
 test_build := $(test_source:%.js=build/%.js)
 tests := build/tests.js
 
