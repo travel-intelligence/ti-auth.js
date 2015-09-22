@@ -27,6 +27,13 @@ describe('Location', () => {
                                .withExactArgs({}, '', '//foo.bar');
       location.replace(target);
     }));
+
+    it('uses query object instead of search string when present', test(function() {
+      let target = { search: '?foo=baz', query: { baz: "42" } };
+      this.mock(url).expects('format')
+                    .withExactArgs({ search: null, query: { baz: "42" } });
+      location.replace(target);
+    }));
   });
 });
 
