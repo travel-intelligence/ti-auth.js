@@ -43,9 +43,9 @@ describe('Authentication', () => {
       Authentication.unauthorize();
       expect(Authentication.token()).to.be.undefined;
     }));
-    it('redirects back to dashboard', test(function() {
+    it('redirects back to dashboard for remove authentication', test(function() {
       this.mock(location).expects('redirect')
-                         .withExactArgs('http://localhost:8080');
+                         .withExactArgs('http://localhost:8080/authorize');
       Authentication.unauthorize();
     }));
   });
