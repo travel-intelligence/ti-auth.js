@@ -18,7 +18,7 @@ build/%.js: %.js
 	babel $< -o $@
 
 $(app): $(build_files)
-	browserify $< -o $@
+	browserify $< -s TiAuth > $@
 
 $(tests): $(test_build)
 	browserify $^ -o $@
