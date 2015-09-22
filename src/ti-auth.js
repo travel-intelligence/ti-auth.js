@@ -1,12 +1,12 @@
 import Authentication from './lib/authentication';
-import Request from './lib/request';
+import API from './lib/api';
 
 export default {
   initialize(resolve) {
     if (Authentication.authorize()) {
-      Request.get('http://localhost:3000/api/users/me',
-                  resolve,
-                  Authentication.unauthorize);
+      API.get('http://localhost:3000/api/users/me',
+              resolve,
+              Authentication.unauthorize);
     } else {
       Authentication.unauthorize();
     }

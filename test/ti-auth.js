@@ -6,7 +6,7 @@ import TiAuth from '../src/ti-auth';
 // Internal dependencies to stub
 import Authentication from '../src/lib/authentication';
 import Location from '../src/lib/location';
-import Request from '../src/lib/request';
+import API from '../src/lib/api';
 
 describe('TiAuth', () => {
   before(function() {
@@ -18,7 +18,7 @@ describe('TiAuth', () => {
   describe('#initialize', () => {
    it('attempts to authorize the user', test(function() {
      this.stub(Authentication, 'authorize', () => true);
-     this.stub(Request, 'get');
+     this.stub(API, 'get');
      TiAuth.initialize();
    }));
 
@@ -32,14 +32,14 @@ describe('TiAuth', () => {
 
     it('loads user from API', test(function() {
       this.stub(Authentication, 'authorize', () => true);
-      this.mock(Request).expects('get')
+      this.mock(API).expects('get')
                         .withArgs('http://localhost:3000/api/users/me');
       TiAuth.initialize();
     }));
 
     it('unauthorizes if request to API failed', test(function() {
       this.stub(Authentication, 'authorize', () => true);
-      this.stub(Request, 'get', function(url, success, error) {
+      this.stub(API, 'get', function(url, success, error) {
         error('Nope.');
       });
       var stub = spy();
@@ -51,7 +51,7 @@ describe('TiAuth', () => {
     it('resolves with user object on success', test(function() {
       var user = { name: 'Joschka' };
       this.stub(Authentication, 'authorize', () => true);
-      this.stub(Request, 'get', function(url, success, error) {
+      this.stub(API, 'get', function(url, success, error) {
         success(user);
       });
       var callback = spy();
