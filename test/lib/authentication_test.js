@@ -9,7 +9,7 @@ import location from '../../src/lib/location';
 describe('Authentication', () => {
   before(function() {
     if (!global.location) {
-      global.location = { href: 'http://ti.test/' };
+      global.location = { href: 'http://ti-module.test/' };
     }
   });
 
@@ -26,11 +26,27 @@ describe('Authentication', () => {
     }));
 
     it('removes auth_token param from URL without modifying history', test(function() {
-      let url = { host: 'foo.bar/', query: { auth_token: 'secret'} };
+      let url = { host: 'foo.bar/', query: { auth_token: 'secret' } };
       this.stub(location, 'parse').returns(url);
       this.mock(location).expects('replace')
                          .withExactArgs({ host: 'foo.bar/', query: {} });
       Authentication.authorize();
+    }));
+  });
+
+  describe('#unauthorize', () => {
+    it('resets token', test(function() {
+      this.stub(location, 'parse').returns({ query: { auth_token: 'secret' } });
+      this.stub(location, 'replace');
+      this.stub(location, 'redirect');
+      Authentication.authorize();
+      Authentication.unauthorize();
+      expect(Authentication.token()).to.be.undefined;
+    }));
+    it('redirects back to dashboard', test(function() {
+      this.mock(location).expects('redirect')
+                         .withExactArgs('http://localhost:8080');
+      Authentication.unauthorize();
     }));
   });
 

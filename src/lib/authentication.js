@@ -16,5 +16,9 @@ export default {
     location.replace(uri);
 
     return true;
+  },
+  unauthorize() {
+    AUTH_TOKEN = undefined;
+    location.redirect('http://localhost:8080');
   }
 };
