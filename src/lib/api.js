@@ -18,6 +18,5 @@ function request(method, url, success, error) {
 }
 
 export default {
-  get: request.bind(this, 'GET'),
-  post: request.bind(this, 'POST')
+  get: request.bind(this, 'GET')
 };
