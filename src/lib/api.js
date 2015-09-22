@@ -1,9 +1,12 @@
+import Authentication from './authentication';
+
 function request(method, url, success, error) {
   var xhr = new XMLHttpRequest();
   xhr.open(method, url, true);
   xhr.onreadystatechange = handler;
   xhr.responseType = 'json';
   xhr.setRequestHeader('Accept', 'application/json');
+  xhr.setRequestHeader('Authorization', 'Token ' + Authentication.token());
   xhr.send();
 
   function handler() {
