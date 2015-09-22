@@ -6,5 +6,8 @@ export default {
   },
   replace(new_location) {
     global.history.replaceState({}, '', url.format(new_location));
+  },
+  redirect(new_location) {
+    global.location.href = new_location;
   }
 };
