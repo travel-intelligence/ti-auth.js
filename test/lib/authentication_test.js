@@ -45,7 +45,7 @@ describe('Authentication', () => {
     }));
     it('redirects back to dashboard for remove authentication', test(function() {
       this.mock(location).expects('redirect')
-                         .withExactArgs('http://localhost:8080/authorize');
+                         .withExactArgs('http://travel-intelligence.dev/authorize');
       Authentication.unauthorize();
     }));
   });

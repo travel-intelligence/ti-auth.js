@@ -4,7 +4,7 @@ import API from './lib/api';
 export default {
   initialize(resolve) {
     if (Authentication.authorize()) {
-      API.get('http://localhost:3000/api/v1/users/me',
+      API.get('http://portal.travel-intelligence.dev/api/v1/users/me',
               resolve,
               Authentication.unauthorize);
     } else {

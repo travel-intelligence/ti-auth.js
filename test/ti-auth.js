@@ -33,7 +33,7 @@ describe('TiAuth', () => {
     it('loads user from API', test(function() {
       this.stub(Authentication, 'authorize', () => true);
       this.mock(API).expects('get')
-                        .withArgs('http://localhost:3000/api/v1/users/me');
+                        .withArgs('http://portal.travel-intelligence.dev/api/v1/users/me');
       TiAuth.initialize();
     }));
 

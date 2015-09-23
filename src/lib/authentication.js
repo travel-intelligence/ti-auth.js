@@ -19,6 +19,6 @@ export default {
   },
   unauthorize() {
     AUTH_TOKEN = undefined;
-    location.redirect('http://localhost:8080/authorize');
+    location.redirect('http://travel-intelligence.dev/authorize');
   }
 };
