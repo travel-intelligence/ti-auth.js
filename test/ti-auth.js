@@ -5,7 +5,6 @@ import TiAuth from '../src/ti-auth';
 
 // Internal dependencies to stub
 import Authentication from '../src/lib/authentication';
-import Location from '../src/lib/location';
 import API from '../src/lib/api';
 
 describe('TiAuth', () => {
