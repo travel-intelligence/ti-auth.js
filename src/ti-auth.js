@@ -3,12 +3,14 @@ import API from './lib/api';
 
 export default {
   initialize(resolve) {
-    if (Authentication.authorize()) {
-      API.get('/api/v1/users/me',
-              resolve,
-              Authentication.unauthorize);
-    } else {
+    if (!Authentication.authorize()) {
       Authentication.unauthorize();
+      return;
     }
+    let token = Authentication.token();
+    API.get('/api/v1/users/me',
+      resolve.bind(this, token),
+      Authentication.unauthorize
+    );
   }
 };
