@@ -1,14 +1,16 @@
-import Authentication from './lib/authentication';
+import Auth from './lib/authentication';
 import API from './lib/api';
 
 export default {
   initialize(resolve) {
-    if (Authentication.authorize()) {
-      API.get('http://portal.travel-intelligence.dev/api/v1/users/me',
-              resolve,
-              Authentication.unauthorize);
-    } else {
-      Authentication.unauthorize();
+    if (!Auth.authorize()) {
+      Auth.unauthorize();
+      return;
     }
+    let token = Auth.token();
+    API.get('/api/v1/users/me',
+      resolve.bind(this, token),
+      Auth.unauthorize
+    );
   }
 };

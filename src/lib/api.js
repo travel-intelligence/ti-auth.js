@@ -1,8 +1,10 @@
 import Authentication from './authentication';
 
+let host = 'http://portal.travel-intelligence.dev';
+
 function request(method, url, success, error) {
-  var xhr = new XMLHttpRequest();
-  xhr.open(method, url, true);
+  let xhr = new XMLHttpRequest();
+  xhr.open(method, host + url, true);
   xhr.onreadystatechange = handler;
   xhr.responseType = 'json';
   xhr.setRequestHeader('Accept', 'application/json');

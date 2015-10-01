@@ -5,7 +5,6 @@ import TiAuth from '../src/ti-auth';
 
 // Internal dependencies to stub
 import Authentication from '../src/lib/authentication';
-import Location from '../src/lib/location';
 import API from '../src/lib/api';
 
 describe('TiAuth', () => {
@@ -19,22 +18,21 @@ describe('TiAuth', () => {
    it('attempts to authorize the user', test(function() {
      this.stub(Authentication, 'authorize', () => true);
      this.stub(API, 'get');
-     TiAuth.initialize();
+     TiAuth.initialize(function() {});
    }));
 
     it('unauthorizes if authorization failed', test(function() {
       this.stub(Authentication, 'authorize', false);
       var stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.initialize();
+      TiAuth.initialize(function() {});
       assert.calledOnce(stub);
     }));
 
     it('loads user from API', test(function() {
       this.stub(Authentication, 'authorize', () => true);
-      this.mock(API).expects('get')
-                        .withArgs('http://portal.travel-intelligence.dev/api/v1/users/me');
-      TiAuth.initialize();
+      this.mock(API).expects('get').withArgs('/api/v1/users/me');
+      TiAuth.initialize(function() {});
     }));
 
     it('unauthorizes if request to API failed', test(function() {
@@ -44,20 +42,21 @@ describe('TiAuth', () => {
       });
       var stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.initialize();
+      TiAuth.initialize(function() {});
       assert.calledOnce(stub);
     }));
 
-    it('resolves with user object on success', test(function() {
+    it('resolves with token and user object on success', test(function() {
       var user = { name: 'Joschka' };
       this.stub(Authentication, 'authorize', () => true);
+      this.stub(Authentication, 'token', () => 'secret');
       this.stub(API, 'get', function(url, success, error) {
         success(user);
       });
-      var callback = spy();
-      TiAuth.initialize(callback);
-      assert.calledOnce(callback);
-      assert.calledWith(callback, user);
+      TiAuth.initialize(function() {
+        expect(arguments[0]).to.equal('secret');
+        expect(arguments[1]).to.equal(user);
+      });
     }));
   });
 });
