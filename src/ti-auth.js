@@ -1,16 +1,16 @@
-import Authentication from './lib/authentication';
+import Auth from './lib/authentication';
 import API from './lib/api';
 
 export default {
   initialize(resolve) {
-    if (!Authentication.authorize()) {
-      Authentication.unauthorize();
+    if (!Auth.authorize()) {
+      Auth.unauthorize();
       return;
     }
-    let token = Authentication.token();
+    let token = Auth.token();
     API.get('/api/v1/users/me',
       resolve.bind(this, token),
-      Authentication.unauthorize
+      Auth.unauthorize
     );
   }
 };
