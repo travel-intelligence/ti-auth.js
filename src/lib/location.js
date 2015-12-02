@@ -1,16 +1,13 @@
-import url from 'url';
+import URL from 'url-parse';
 
 export default {
   parse() {
-    return url.parse(global.location.href, true);
+    return new URL(global.location.href, true);
   },
-  replace(new_location) {
-    if (new_location.search && new_location.query) {
-      new_location.search = null;
-    }
-    global.history.replaceState({}, '', url.format(new_location));
+  replace(destination) {
+   global.history.replaceState({}, '', destination.href);
   },
-  redirect(new_location) {
-    global.location.href = new_location;
+  redirect(destination) {
+    global.location.href = destination;
   }
 };
