@@ -15,7 +15,7 @@ describe('Authentication', () => {
 
   describe('#authorize', () => {
     it('succeeds when auth_token param exists', test(function() {
-      this.stub(location, 'parse', str => ({ query: { auth_token: 'secret'} }));
+      this.stub(location, 'parse', str => ({ query: { auth_token: 'secret' } }));
       this.stub(location, 'replace');
       expect(Authentication.authorize()).to.equal(true);
     }));
