@@ -26,10 +26,10 @@ describe('Authentication', () => {
     }));
 
     it('removes auth_token param from URL without modifying history', test(function() {
-      let url = { host: 'foo.bar/', query: { auth_token: 'secret' } };
+      let url = { hostname: 'foo.bar', query: { auth_token: 'secret' } };
       this.stub(location, 'parse').returns(url);
       this.mock(location).expects('replace')
-                         .withExactArgs({ host: 'foo.bar/', query: {} });
+                         .withExactArgs({ hostname: 'foo.bar', query: {} });
       Authentication.authorize();
     }));
   });
@@ -43,6 +43,7 @@ describe('Authentication', () => {
       Authentication.unauthorize();
       expect(Authentication.token()).to.be.undefined;
     }));
+
     it('redirects back to dashboard for remove authentication', test(function() {
       this.mock(location).expects('redirect')
                          .withExactArgs('http://travel-intelligence.dev/authorize');
@@ -52,6 +53,7 @@ describe('Authentication', () => {
 
   describe('#token', () => {
     it('is empty by default', test(function() {
+      this.stub(location, 'parse').returns({ query: {} });
       Authentication.authorize();
       expect(Authentication.token()).to.be.undefined
     }));

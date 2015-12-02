@@ -1,9 +1,10 @@
 import { test } from 'sinon';
+import { expect } from 'chai';
 
 import location from '../../src/lib/location';
 
-// Internal dependencies to stub
-import url from 'url';
+// Internal dependencies to compare
+import URL from 'url-parse';
 
 describe('Location', () => {
 
@@ -14,24 +15,16 @@ describe('Location', () => {
 
   describe('#parse', () => {
     it('parses the URL', test(function() {
-      this.mock(url).expects('parse')
-                    .withExactArgs(global.location.href, true);
-      location.parse();
+      let result = location.parse();
+      expect(result instanceof URL).to.be.true;
     }));
   });
 
   describe('#replace', () => {
     it('changes URL without modifying history', test(function() {
-      let target = { host: 'foo.bar' };
+      let target = { href: 'safe://foo.bar' };
       this.mock(global.history).expects('replaceState')
-                               .withExactArgs({}, '', '//foo.bar');
-      location.replace(target);
-    }));
-
-    it('uses query object instead of search string when present', test(function() {
-      let target = { search: '?foo=baz', query: { baz: "42" } };
-      this.mock(url).expects('format')
-                    .withExactArgs({ search: null, query: { baz: "42" } });
+                               .withExactArgs({}, '', 'safe://foo.bar');
       location.replace(target);
     }));
   });
