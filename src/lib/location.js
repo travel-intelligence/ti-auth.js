@@ -5,7 +5,7 @@ export default {
     return new URL(global.location.href, true);
   },
   replace(destination) {
-   global.history.replaceState({}, '', destination.href);
+   global.history.replaceState({}, '', destination);
   },
   redirect(destination) {
     global.location.href = destination;

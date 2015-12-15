@@ -22,9 +22,9 @@ describe('Location', () => {
 
   describe('#replace', () => {
     it('changes URL without modifying history', test(function() {
-      let target = { href: 'safe://foo.bar' };
+      let target = 'safe://foo.bar';
       this.mock(global.history).expects('replaceState')
-                               .withExactArgs({}, '', 'safe://foo.bar');
+                               .withExactArgs({}, '', target);
       location.replace(target);
     }));
   });

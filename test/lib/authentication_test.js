@@ -26,10 +26,12 @@ describe('Authentication', () => {
     }));
 
     it('removes auth_token param from URL without modifying history', test(function() {
-      let url = { hostname: 'foo.bar', query: { auth_token: 'secret' } };
+      let url = { hostname: 'foo.bar',
+                  query: { auth_token: 'secret', foo: 'bar' } };
       this.stub(location, 'parse').returns(url);
       this.mock(location).expects('replace')
-                         .withExactArgs({ hostname: 'foo.bar', query: {} });
+                         .withExactArgs({ hostname: 'foo.bar',
+                                          query: { foo: 'bar' } });
       Authentication.authorize();
     }));
   });
