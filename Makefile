@@ -20,7 +20,7 @@ build/%.js: %.js
 $(app): $(build_files)
 	browserify $< -s TiAuth > $@
 
-$(tests): $(test_build)
+$(tests): $(test_build) $(build_files)
 	browserify $^ -o $@
 
 watch: $(source_files) $(test_files)
