@@ -21,6 +21,7 @@
     "**/*",
     "!dist/*"
   ],
+  "main": "dist/ti-auth.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:travel-intelligence/ti-auth.js.git"
