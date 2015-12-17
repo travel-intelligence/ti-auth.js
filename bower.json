@@ -6,11 +6,6 @@
   "moduleType": [
     "globals"
   ],
-  "keywords": [
-    "authentication",
-    "travel-intelligence",
-    "amadeus"
-  ],
   "authors": [
     {
       "name": "Joschka Kintscher",
