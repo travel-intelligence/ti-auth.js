@@ -1,0 +1,21 @@
+{
+  "name": "ti-auth.js",
+  "description": "The official authentication library to use in your Travel Intelligence modules",
+  "dependencies": {},
+  "devDependncies": {},
+  "ignore": [
+    "**/*",
+    "!dist/*"
+  ],
+  "main": "dist/ti-auth.js",
+  "moduleType": "globals",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:travel-intelligence/ti-auth.js.git"
+  },
+  "authors": [{
+    "name": "Joschka Kintscher",
+    "email": "joschka@kintscher.me"
+  }]
+}
