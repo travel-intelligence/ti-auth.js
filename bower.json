@@ -1,0 +1,29 @@
+{
+  "name": "ti-auth.js",
+  "description": "",
+  "dependncies": {},
+  "devDependncies": {},
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "authentication",
+    "travel-intelligence",
+    "amadeus"
+  ],
+  "authors": [
+    {
+      "name": "Joschka Kintscher",
+      "email": "joschka@kintscher.me"
+    }
+  ],
+  "ignore": [
+    "**/*",
+    "!dist/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:travel-intelligence/ti-auth.js.git"
+  },
+  "private": false
+}
