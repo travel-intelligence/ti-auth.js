@@ -1,6 +1,6 @@
 {
   "name": "ti-auth.js",
-  "description": "",
+  "description": "The official authentication library to use in your Travel Intelligence modules",
   "dependencies": {},
   "devDependncies": {},
   "moduleType": [
