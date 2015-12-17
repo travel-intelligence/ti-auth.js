@@ -9,7 +9,7 @@ test_files := test/ti-auth_test.js $(wildcard test/lib/*_test.js)
 test_build := $(test_files:%.js=build/%.js)
 tests := build/tests.js
 
-dist := dist
+dist := dist/
 
 .PHONY: all watch test clean dist
 
@@ -34,9 +34,9 @@ test: all
 dist: $(app)
 	mkdir -p $(dist)
 	cp $< $(dist)
-	uglifyjs $< -o $(dist)/ti-auth.min.js \
+	uglifyjs $< -o $(dist)ti-auth.min.js \
 	  --mangle \
-	  --source-map $(dist)/ti-auth.min.js.source
+	  --source-map $(dist)ti-auth.min.js.source
 
 clean:
 	rm -rf build
