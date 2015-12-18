@@ -1,4 +1,7 @@
 {
+  "name": "ti-auth.js",
+  "version": "1.0.0",
+  "description": "The official authentication library to use in your Travel Intelligence modules",
   "scripts": {
     "test": "make test"
   },
