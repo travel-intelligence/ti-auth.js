@@ -1,4 +1,7 @@
 {
+  "name": "ti-auth.js",
+  "version": "1.0.0",
+  "description": "The official authentication library to use in your Travel Intelligence modules",
   "scripts": {
     "test": "make test"
   },
@@ -13,5 +16,14 @@
     "testem": "0.9.5",
     "uglifyjs": "2.4.10",
     "url-parse": "1.0.5"
-  }
+  },
+  "repository" : {
+    "type": "git",
+    "url": "git@github.com:travel-intelligence/ti-auth.js.git"
+  },
+  "files": [
+    "dist/"
+  ],
+  "author": "Joschka Kintscher <joschka@kintscher.me>",
+  "license": "MIT"
 }
