@@ -13,5 +13,7 @@
     "testem": "0.9.5",
     "uglifyjs": "2.4.10",
     "url-parse": "1.0.5"
-  }
+  },
+  "author": "Joschka Kintscher <joschka@kintscher.me>",
+  "license": "MIT"
 }

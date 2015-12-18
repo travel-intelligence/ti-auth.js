@@ -14,5 +14,6 @@
     "type": "git",
     "url": "git@github.com:travel-intelligence/ti-auth.js.git"
   },
-  "authors": [ "Joschka Kintscher <joschka@kintscher.me>" ]
+  "authors": [ "Joschka Kintscher <joschka@kintscher.me>" ],
+  "license": "MIT"
 }
