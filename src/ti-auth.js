@@ -12,5 +12,8 @@ export default {
       resolve.bind(this, token),
       Auth.unauthorize
     );
+  },
+  signout() {
+    Auth.unauthorize();
   }
 };
