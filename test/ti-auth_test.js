@@ -18,21 +18,21 @@ describe('TiAuth', () => {
    it('attempts to authorize the user', test(function() {
      this.stub(Authentication, 'authorize', () => true);
      this.stub(API, 'get');
-     TiAuth.initialize(function() {});
+     TiAuth.initialize('//portal.test', function() {});
    }));
 
     it('unauthorizes if authorization failed', test(function() {
       this.stub(Authentication, 'authorize', false);
       var stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.initialize(function() {});
+      TiAuth.initialize('//portal.test', function() {});
       assert.calledOnce(stub);
     }));
 
     it('loads user from API', test(function() {
       this.stub(Authentication, 'authorize', () => true);
-      this.mock(API).expects('get').withArgs('/api/v1/users/me');
-      TiAuth.initialize(function() {});
+      this.mock(API).expects('get').withArgs('//portal.test/api/v1/users/me');
+      TiAuth.initialize('//portal.test', function() {});
     }));
 
     it('unauthorizes if request to API failed', test(function() {
@@ -42,7 +42,7 @@ describe('TiAuth', () => {
       });
       var stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.initialize(function() {});
+      TiAuth.initialize('//portal.test', function() {});
       assert.calledOnce(stub);
     }));
 
@@ -53,7 +53,7 @@ describe('TiAuth', () => {
       this.stub(API, 'get', function(url, success, error) {
         success(user);
       });
-      TiAuth.initialize(function() {
+      TiAuth.initialize('//portal.test', function() {
         expect(arguments[0]).to.equal('secret');
         expect(arguments[1]).to.equal(user);
       });
