@@ -59,4 +59,13 @@ describe('TiAuth', () => {
       });
     }));
   });
+
+  describe('#unauthenticate', () => {
+    it('delegates to Authentication#unauthorize', test(function() {
+      var stub = spy();
+      this.stub(Authentication, 'unauthorize', stub);
+      TiAuth.signout();
+      assert.calledOnce(stub);
+    }));
+  });
 });
