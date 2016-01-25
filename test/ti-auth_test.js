@@ -8,14 +8,28 @@ import Authentication from '../src/lib/authentication';
 import API from '../src/lib/api';
 
 describe('TiAuth', () => {
-  before(function() {
+  beforeEach(function() {
     if (!global.location) {
       global.location = { href: 'http://ti-module.test/' };
     }
     TiAuth.API_URL = 'https://api.test';
+    TiAuth.DASHBOARD_URL = 'https://api.test';
   });
 
   describe('#initialize', () => {
+   it('throws if API_URL has not been configured', test(function() {
+     TiAuth.API_URL = '';
+     TiAuth.DASHBOARD_URL = 'https://dashboard.test';
+     expect(TiAuth.initialize).to.throw(Error);
+    ;
+   }));
+
+   it('throws if DASHBOARD_URL has not been configured', test(function() {
+     TiAuth.API_URL = 'https://api.test';
+     TiAuth.DASHBOARD_URL = '';
+     expect(TiAuth.initialize).to.throw(Error);
+   }));
+
    it('attempts to authorize the user', test(function() {
      this.stub(Authentication, 'authorize', () => true);
      this.stub(API, 'get');

@@ -9,10 +9,21 @@ function retrieve_user(resolve) {
   );
 }
 
+function validate_config() {
+  if (TiAuth.API_URL === '') {
+    throw new Error('`TiAuth.API_URL` needs to be configured.');
+  }
+  if (TiAuth.DASHBOARD_URL === '') {
+    throw new Error('`TiAuth.DASHBOARD_URL` needs to be configured.');
+  }
+}
+
 const TiAuth = {
   API_URL: '',
   DASHBOARD_URL: '',
+
   initialize(resolve) {
+    validate_config();
     if (!Auth.authorize()) {
       Auth.unauthorize();
       return;
