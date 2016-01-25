@@ -12,6 +12,7 @@ describe('TiAuth', () => {
     if (!global.location) {
       global.location = { href: 'http://ti-module.test/' };
     }
+    TiAuth.API_URL = 'https://api.test';
   });
 
   describe('#initialize', () => {
@@ -31,7 +32,7 @@ describe('TiAuth', () => {
 
     it('loads user from API', test(function() {
       this.stub(Authentication, 'authorize', () => true);
-      this.mock(API).expects('get').withArgs('/api/v1/users/me');
+      this.mock(API).expects('get').withArgs('https://api.test/api/v1/users/me');
       TiAuth.initialize(function() {});
     }));
 

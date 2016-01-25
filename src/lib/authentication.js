@@ -1,3 +1,4 @@
+import TiAuth from '../ti-auth';
 import location from './location';
 
 let AUTH_TOKEN;
@@ -19,6 +20,6 @@ export default {
   },
   unauthorize() {
     AUTH_TOKEN = undefined;
-    location.redirect('http://travel-intelligence.dev/authorize');
+    location.redirect(TiAuth.DASHBOARD_URL + '/authorize');
   }
 };
