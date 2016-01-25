@@ -61,7 +61,7 @@ describe('TiAuth', () => {
     }));
   });
 
-  describe('#unauthenticate', () => {
+  describe('#signout', () => {
     it('delegates to Authentication#unauthorize', test(function() {
       var stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
