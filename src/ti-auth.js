@@ -3,13 +3,13 @@ import API from './lib/api';
 
 function retrieve_user(resolve) {
   let token = Auth.token();
-  API.get(this.API_URL + '/api/v1/users/me',
-    resolve.bind(this, token),
+  API.get(TiAuth.API_URL + '/api/v1/users/me',
+    resolve.bind(null, token),
     Auth.unauthorize
   );
 }
 
-export default {
+const TiAuth = {
   API_URL: '',
   DASHBOARD_URL: '',
   initialize(resolve) {
@@ -17,9 +17,11 @@ export default {
       Auth.unauthorize();
       return;
     }
-    retrieve_user.call(this, resolve);
+    retrieve_user(resolve);
   },
   signout() {
     Auth.unauthorize();
   }
 };
+
+export default TiAuth;
