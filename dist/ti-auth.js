@@ -47,6 +47,10 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _tiAuth = require('../ti-auth');
+
+var _tiAuth2 = _interopRequireDefault(_tiAuth);
+
 var _location = require('./location');
 
 var _location2 = _interopRequireDefault(_location);
@@ -72,12 +76,12 @@ exports['default'] = {
   },
   unauthorize: function unauthorize() {
     AUTH_TOKEN = undefined;
-    _location2['default'].redirect('http://travel-intelligence.dev/authorize');
+    _location2['default'].redirect(_tiAuth2['default'].DASHBOARD_URL + '/authorize');
   }
 };
 module.exports = exports['default'];
 
-},{"./location":3}],3:[function(require,module,exports){
+},{"../ti-auth":4,"./location":3}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -122,16 +126,38 @@ var _libApi = require('./lib/api');
 
 var _libApi2 = _interopRequireDefault(_libApi);
 
-exports['default'] = {
+function retrieve_user(resolve) {
+  var token = _libAuthentication2['default'].token();
+  _libApi2['default'].get(TiAuth.API_URL + '/api/v1/users/me', resolve.bind(null, token), _libAuthentication2['default'].unauthorize);
+}
+
+function validate_config() {
+  if (TiAuth.API_URL === '') {
+    throw new Error('`TiAuth.API_URL` needs to be configured.');
+  }
+  if (TiAuth.DASHBOARD_URL === '') {
+    throw new Error('`TiAuth.DASHBOARD_URL` needs to be configured.');
+  }
+}
+
+var TiAuth = {
+  API_URL: '',
+  DASHBOARD_URL: '',
+
   initialize: function initialize(resolve) {
+    validate_config();
     if (!_libAuthentication2['default'].authorize()) {
       _libAuthentication2['default'].unauthorize();
       return;
     }
-    var token = _libAuthentication2['default'].token();
-    _libApi2['default'].get('/api/v1/users/me', resolve.bind(this, token), _libAuthentication2['default'].unauthorize);
+    retrieve_user(resolve);
+  },
+  signout: function signout() {
+    _libAuthentication2['default'].unauthorize();
   }
 };
+
+exports['default'] = TiAuth;
 module.exports = exports['default'];
 
 },{"./lib/api":1,"./lib/authentication":2}],5:[function(require,module,exports){
