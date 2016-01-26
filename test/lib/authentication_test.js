@@ -5,12 +5,14 @@ import Authentication from '../../src/lib/authentication';
 
 // Internal dependencies to stub
 import location from '../../src/lib/location';
+import TiAuth from '../../src/ti-auth';
 
 describe('Authentication', () => {
   before(function() {
     if (!global.location) {
       global.location = { href: 'http://ti-module.test/' };
     }
+    TiAuth.DASHBOARD_URL = 'https://portal.test';
   });
 
   describe('#authorize', () => {
@@ -48,7 +50,7 @@ describe('Authentication', () => {
 
     it('redirects back to dashboard for remove authentication', test(function() {
       this.mock(location).expects('redirect')
-                         .withExactArgs('http://travel-intelligence.dev/authorize');
+                         .withExactArgs('https://portal.test/authorize');
       Authentication.unauthorize();
     }));
   });
