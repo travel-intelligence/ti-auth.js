@@ -11,11 +11,9 @@ var _authentication = require('./authentication');
 
 var _authentication2 = _interopRequireDefault(_authentication);
 
-var host = 'http://portal.travel-intelligence.dev';
-
 function request(method, url, success, error) {
   var xhr = new XMLHttpRequest();
-  xhr.open(method, host + url, true);
+  xhr.open(method, url, true);
   xhr.onreadystatechange = handler;
   xhr.responseType = 'json';
   xhr.setRequestHeader('Accept', 'application/json');
