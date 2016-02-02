@@ -6,6 +6,7 @@ import TiAuth from '../src/ti-auth';
 // Internal dependencies to stub
 import Authentication from '../src/lib/authentication';
 import API from '../src/lib/api';
+import Location from '../src/lib/location';
 
 describe('TiAuth', () => {
   beforeEach(function() {
@@ -81,6 +82,16 @@ describe('TiAuth', () => {
       this.stub(Authentication, 'unauthorize', stub);
       TiAuth.reauthorize();
       assert.calledOnce(stub);
+    }));
+  });
+
+  describe('#signout', () => {
+    it('redirects to Dashboard/unauthorize', test(function() {
+      TiAuth.DASHBOARD_URL = '://dashboard.com';
+      var stub = spy();
+      this.stub(Location, 'redirect', stub);
+      TiAuth.signout();
+      assert.calledWith(stub, '://dashboard.com/unauthorize');
     }));
   });
 });
