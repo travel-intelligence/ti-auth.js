@@ -75,11 +75,11 @@ describe('TiAuth', () => {
     }));
   });
 
-  describe('#signout', () => {
+  describe('#reauthorize', () => {
     it('delegates to Authentication#unauthorize', test(function() {
       var stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.signout();
+      TiAuth.reauthorize();
       assert.calledOnce(stub);
     }));
   });

@@ -30,7 +30,7 @@ const TiAuth = {
     }
     retrieve_user(resolve);
   },
-  signout() {
+  reauthorize() {
     Auth.unauthorize();
   }
 };
