@@ -1,5 +1,6 @@
 import Auth from './lib/authentication';
 import API from './lib/api';
+import Location from './lib/location';
 
 function retrieve_user(resolve) {
   let token = Auth.token();
@@ -30,8 +31,11 @@ const TiAuth = {
     }
     retrieve_user(resolve);
   },
-  signout() {
+  reauthorize() {
     Auth.unauthorize();
+  },
+  signout() {
+    Location.redirect(TiAuth.DASHBOARD_URL + '/unauthorize');
   }
 };
 
