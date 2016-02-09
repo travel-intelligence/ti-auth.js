@@ -58,7 +58,8 @@ TiAuth.logout();
 
 The initialization can be done in ember by creating a custom initializer.
 
-1. Import `ti-auth.js` in `ember-cli-build.js`
+1. Import `ti-auth.js` in `ember-cli-build.js`:
+ 
   ```javascript
   app.import('bower_components/ti-auth.js/dist/ti-auth.min.js');
   ```
@@ -86,6 +87,7 @@ The initialization can be done in ember by creating a custom initializer.
   default TiAuthInitializer;
   ```
 3. Import the initializer in the header of `app/app.js`:
+
   ```javascript
   import TiAuthInitializer from './initializers/ti-auth';
   ```
