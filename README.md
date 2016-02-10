@@ -16,12 +16,11 @@ or via NPM:
 
     $ npm install https://github.com/travel-intelligence/ti-auth.js --save-dev
 
-Alternatively you can manually download `dist/ti-auth.js` or `dist/ti-auth.min.js` and add it to your project.
-
 ## Quick Start
 
-For ease of use the library exposes one global JavaScript object called **TiAuth**.<br>
-After including the library in the project page only 2 simple steps are needed to use `ti-auth.js` for authentication:
+For ease of use the library exposes one global JavaScript object called **TiAuth**.
+
+After including the library in the in your application’s index.html file only 2 simple steps are needed to use `ti-auth.js` for authentication:
 
 1. **Configuration** - depending on the target environment (production/staging/local etc.) the Travel Intelligence API and the
 Portal URL need to be set. This can be done anywhere **before** the first call of the `TiAuth.initialize()`:
@@ -34,14 +33,14 @@ Portal URL need to be set. This can be done anywhere **before** the first call o
 2. **Use the `initialize` method** - to bootstrap your application:
 
     ```javascript
-    TiAuth.initialize(function(token, context) {
+    TiAuth.initialize(function(token, user) {
       //bootstrap your application here
     });
     ```
 
   `token` is the authentication token needed to call Travel Intelligence services
 
-  `context` contains the user with its preferences
+  `user` contains the user with its preferences
 
 ## Logout
 
@@ -76,7 +75,7 @@ The initialization can be done in ember by creating a custom initializer.
       TiAuth.API_URL = 'https://staging-api.travel-intelligence.com';
       TiAuth.DASHBOARD_URL = 'http://travel-intelligence.dev';
 
-      TiAuth.initialize(function(token, context) {
+      TiAuth.initialize(function(token, user) {
         application.set('token', token);
         application.advanceReadiness();
       });
