@@ -20,7 +20,7 @@ or via NPM:
 
 For ease of use the library exposes one global JavaScript object called `TiAuth` to interact with.
 
-After including the library in the in your application’s index.html file only 2 simple steps are needed to use `ti-auth.js` for authentication:
+After including the library in your application’s index.html file only 2 simple steps are needed to use `ti-auth.js` for authentication:
 
 1. **Configuration** - Specify the URLs of the Travel Intelligence API and the Portal you would like to use:
 
@@ -34,11 +34,11 @@ After including the library in the in your application’s index.html file only 
 
     ```javascript
     TiAuth.initialize(function(token, user) {
-      //bootstrap your application here
+      // Bootstrap your application here
     });
     ```
 
-  *Note:* See the [API documentation](##API) for more infos on the provided parameters;
+  *Note:* See the [API documentation](##API) for more infos on the provided parameters.
 
 ## API
 
@@ -49,7 +49,7 @@ Use this to sign out the current user and take them back to the login page of th
 Example:
 
 ```javascript
-TiAuth.logout();
+TiAuth.signout();
 ```
 
 ### `reauthorize`
@@ -61,8 +61,7 @@ Example:
 TiAuth.reauthorize();
 ```
 
-*Note that this will redirect them to the Dashboard and then back to your module if they are still logged in, so make sure to persist any state you want to return them to before calling this.
-initialize (callback)*
+*Note:* This will redirect them to the Dashboard and then back to your module if they are still logged in, so make sure to persist any state you want to return them to before calling this.
 
 ### `initialize` *(callback)*
 
