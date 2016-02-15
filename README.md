@@ -114,9 +114,11 @@ The initialization can be done in Ember by creating a custom initializer.
 
 2. Use Ember-CLI to Create an initializer for ti-auth:
 
-        $ ember generate instance-initializer ti-auth 
+    ```sh
+    $ ember generate instance-initializer ti-auth
+    ```
 
-    Edit `app/initializers/ti-auth.js` with the following content:
+3. Edit `app/initializers/ti-auth.js` with the following content:
 
     ```javascript
     import Ember from 'ember';
@@ -166,23 +168,33 @@ Just a few remarks for users intending to extend the `ti-auth.js` library.
 
 Clone the repository:
 
-    $ git clone git@github.com:travel-intelligence/ti-auth.js.git
+```sh
+$ git clone git@github.com:travel-intelligence/ti-auth.js.git
+```
 
 Install the required dependencies:
 
-    $ npm install
+```sh
+$ npm install
+```
 
 ### Tests
 
-    $ make test
+```sh
+$ make test
+```
 
 ### Build
 
-    $ make
+```sh
+$ make
+```
 
 or use
 
-    $ make watch
+```sh
+$ make watch
+```
 
 to automatically watch for file changes and re-build the library.
 
