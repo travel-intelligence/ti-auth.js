@@ -164,9 +164,9 @@ The initialization can be done in Ember by creating a custom initializer.
   };
   ```
 
-*Note:* If you’re on a version of Ember >= 2.1 you should use an
+*Note:* If you’re on a version of Ember >= 2.1 you probably want to use an
 [`instanceInitializer`](https://guides.emberjs.com/v2.1.0/applications/initializers/#toc_application-instance-initializers)
-instead.
+here instead.
 
 ### Angular
 
@@ -195,7 +195,7 @@ Just a few remarks for users intending to extend the `ti-auth.js` library.
 ### Dependencies
 
 These are dependencies that you need to have installed before being able to work
-with the source files of the library.
+with the source files of this library.
 
 - [`node`](http://nodejs.org/) >= 5.1.0
 - [`npm`](https://www.npmjs.com/) >= 3.3.12
@@ -206,13 +206,13 @@ still work but have not been officially tested.
 
 ### Setup
 
-Clone the repository:
+Clone the repository
 
 ```sh
 $ git clone git@github.com:travel-intelligence/ti-auth.js.git
 ```
 
-Install the required dependencies:
+and install its dependencies
 
 ```sh
 $ npm install
