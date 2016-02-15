@@ -137,6 +137,8 @@ The initialization can be done in Ember by creating a custom initializer.
     };
     ```
 
+*Note:* If you’re on a version of Ember >= 2.1 you should use an [`instanceInitializer`](https://guides.emberjs.com/v2.1.0/applications/initializers/#toc_application-instance-initializers) instead.
+
 ### Angular
 
 1. Remove the `ng-app` attribute from the page root element.
