@@ -112,7 +112,7 @@ The initialization can be done in Ember by creating a custom initializer.
   app.import('path/to/your/ti-auth.js');
   ```
 
-2. Use Ember-CLI to Create an initializer for ti-auth:
+2. Use Ember-CLI to create an initializer for ti-auth:
 
     ```sh
     $ ember generate initializer ti-auth
