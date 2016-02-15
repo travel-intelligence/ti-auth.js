@@ -197,6 +197,14 @@ $ make watch
 
 to automatically watch for file changes and re-build the library.
 
+### Distribute
+
+To create a distributable file (that includes all modules and exposes the `TiAuth` object), run
+
+```sh
+$ make dist
+```
+
 ## Author
 
 [Joschka Kintscher](https://github.com/jkintscher)
