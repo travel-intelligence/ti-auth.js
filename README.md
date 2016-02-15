@@ -121,12 +121,9 @@ The initialization can be done in Ember by creating a custom initializer.
 3. Edit `app/initializers/ti-auth.js` with the following content:
 
     ```javascript
-    import Ember from 'ember';
-
     export default {
       name: 'waitForTiAuth',
       initialize: function(application) {
-
         application.deferReadiness();
 
         TiAuth.API_URL = 'https://api.travel-intelligence.com';
