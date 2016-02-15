@@ -218,12 +218,6 @@ and install its dependencies
 $ npm install
 ```
 
-### Tests
-
-```sh
-$ make test
-```
-
 ### Build
 
 ```sh
@@ -237,6 +231,12 @@ $ make watch
 ```
 
 to automatically watch for file changes and re-build the library.
+
+### Tests
+
+```sh
+$ make test
+```
 
 ### Distribute
 
