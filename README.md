@@ -28,7 +28,7 @@ After including the library in your application’s index.html file only 2 simpl
     TiAuth.API_URL = 'https://api.travel-intelligence.com';
     TiAuth.DASHBOARD_URL = 'https://travel-intelligence.com';
     ```
-   *Note:* If you fail to provide these two URLs before calling TiAuth.initialize() an exception is thrown.
+   *Note:* If you fail to provide these two URLs before calling `TiAuth.initialize()` an exception is thrown.
 
 2. **Authentication** - to bootstrap your application:
 
@@ -38,7 +38,7 @@ After including the library in your application’s index.html file only 2 simpl
     });
     ```
 
-  *Note:* See the [API documentation](##API) for more infos on the provided parameters.
+  *Note:* See the [API documentation](#api) for more infos on the provided parameters.
 
 ## API
 
@@ -54,7 +54,7 @@ TiAuth.signout();
 
 ### `reauthorize`
 
-This allows you to make sure the current user is still authenticated. This is especially helpful when a request your module makes is rejected by the API with a 401 or 403 status code, indicating that the user’s token is no longer valid.
+This allows you to make sure the current user is still authenticated. This is especially helpful when a request your module makes is rejected by the API with a `401` or `403` status code, indicating that the user’s token is no longer valid.
 
 Example:
 ```javascript
