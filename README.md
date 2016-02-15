@@ -66,9 +66,11 @@ TiAuth.reauthorize();
 ### `initialize` *(callback)*
 
 This is the main interface that allows you to authenticate the user before booting your application. The callback you provide is called after successful authentication and should have the following signature:
+
 ```javascript
 function(token, user);
 ```
+
 The two optional parameters get you access to the user’s token and other information as provided by the API.
 
 The `user` object has the following properties:
@@ -83,6 +85,7 @@ The `user` object has the following properties:
 - `subscriber_id` (number)
 
 Use `token` to authenticate all requests your application is making to the Travel Intelligence API by adding a custom request header following this format (replace `<the-token>` with the value of the `token` parameter):
+
 ```
 Authorization: Token <the-token>
 ```
@@ -95,8 +98,8 @@ TiAuth.initialize(function(token, user) {
 });
 ```
 
-
 ## Framework Integration
+
 `ti-auth.js` does not have any dependencies and works completely independent from frameworks and libraries. At the same time it allows for seamless integration with any framework you may choose for your module. In this section you can find some example implementations for a few popular frameworks.
 
 ### Ember
@@ -104,7 +107,7 @@ TiAuth.initialize(function(token, user) {
 The initialization can be done in Ember by creating a custom initializer.
 
 1. Import `ti-auth.js` in `ember-cli-build.js`:
- 
+
   ```javascript
   app.import('path/to/your/ti-auth.js');
   ```
@@ -160,6 +163,7 @@ The initialization can be done in Ember by creating a custom initializer.
 Just a few remarks for users intending to extend the `ti-auth.js` library.
 
 ### Setup
+
 Clone the repository:
 
     $ git clone git@github.com:travel-intelligence/ti-auth.js.git
@@ -182,11 +186,12 @@ or use
 
 to automatically watch for file changes and re-build the library.
 
-
 ## Author
+
 [Joschka Kintscher](https://github.com/jkintscher)
 
 ## MIT License
+
 Copyright (c) 2016 by Amadeus IT Group SA
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
