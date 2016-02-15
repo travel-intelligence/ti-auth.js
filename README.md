@@ -163,6 +163,16 @@ The initialization can be done in Ember by creating a custom initializer.
 
 Just a few remarks for users intending to extend the `ti-auth.js` library.
 
+### Dependencies
+
+These are dependencies that you need to have installed before being able to work with the source files of the library.
+
+- [`node`](http://nodejs.org/) >= 5.1.0
+- [`npm`](https://www.npmjs.com/) >= 3.3.12
+- [`make`](https://www.gnu.org/software/make/) >= 3.81
+
+*Note:* These versions have been used in development. Older versions likely still work but have not been officially tested.
+
 ### Setup
 
 Clone the repository:
