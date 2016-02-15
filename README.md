@@ -115,7 +115,7 @@ The initialization can be done in Ember by creating a custom initializer.
 2. Use Ember-CLI to Create an initializer for ti-auth:
 
     ```sh
-    $ ember generate instance-initializer ti-auth
+    $ ember generate initializer ti-auth
     ```
 
 3. Edit `app/initializers/ti-auth.js` with the following content:
