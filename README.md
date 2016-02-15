@@ -100,7 +100,7 @@ TiAuth.initialize(function(token, user) {
 
 ## Framework Integration
 
-`ti-auth.js` does not have any dependencies and works completely independent from frameworks and libraries. At the same time it allows for seamless integration with any framework you may choose for your module. In this section you can find some example implementations for a few popular frameworks.
+`ti-auth.js` does not have any dependencies and works completely independently from frameworks and libraries. At the same time it allows for seamless integration with any framework you may choose for your module. In this section you can find some example implementations for a few popular frameworks.
 
 ### Ember
 
