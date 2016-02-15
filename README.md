@@ -87,7 +87,7 @@ The `user` object has the following properties:
 Use `token` to authenticate all requests your application is making to the Travel Intelligence API by adding a custom request header following this format (replace `<the-token>` with the value of the `token` parameter):
 
 ```
-Authorization: Token <the-token>
+Authorization: Token <your-token-goes-here>
 ```
 
 Example:
