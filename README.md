@@ -18,19 +18,19 @@ or via NPM:
 
 ## Quick Start
 
-For ease of use the library exposes one global JavaScript object called **TiAuth**.
+For ease of use the library exposes one global JavaScript object called `TiAuth` to interact with.
 
 After including the library in the in your application’s index.html file only 2 simple steps are needed to use `ti-auth.js` for authentication:
 
-1. **Configuration** - depending on the target environment (production/staging/local etc.) the Travel Intelligence API and the
-Portal URL need to be set. This can be done anywhere **before** the first call of the `TiAuth.initialize()`:
+1. **Configuration** - Specify the URLs of the Travel Intelligence API and the Portal you would like to use:
 
     ```javascript
     TiAuth.API_URL = 'https://api.travel-intelligence.com';
-    TiAuth.DASHBOARD_URL = 'https://portal.travel-intelligence.com';
+    TiAuth.DASHBOARD_URL = 'https://travel-intelligence.com';
     ```
+   *Note:* If you fail to provide these two URLs before calling TiAuth.initialize() an exception is thrown.
 
-2. **Use the `initialize` method** - to bootstrap your application:
+2. **Authentication** - to bootstrap your application:
 
     ```javascript
     TiAuth.initialize(function(token, user) {
@@ -38,68 +38,109 @@ Portal URL need to be set. This can be done anywhere **before** the first call o
     });
     ```
 
-  `token` is the authentication token needed to call Travel Intelligence services
+  *Note:* See the [API documentation](##API) for more infos on the provided parameters;
 
-  `user` contains the user with its preferences
+## API
 
-## Logout
+### `signout`
 
-`ti-auth.js` provides the ability to invalidate the current user session. It will automatically redirect the user to the login page.
+Use this to sign out the current user and take them back to the login page of the TI Dashboard.
+
+Example:
 
 ```javascript
 TiAuth.logout();
 ```
 
+### `reauthorize`
+
+This allows you to make sure the current user is still authenticated. This is especially helpful when a request your module makes is rejected by the API with a 401 or 403 status code, indicating that the user’s token is no longer valid.
+
+Example:
+```javascript
+TiAuth.reauthorize();
+```
+
+*Note that this will redirect them to the Dashboard and then back to your module if they are still logged in, so make sure to persist any state you want to return them to before calling this.
+initialize (callback)*
+
+### `initialize` *(callback)*
+
+This is the main interface that allows you to authenticate the user before booting your application. The callback you provide is called after successful authentication and should have the following signature:
+```javascript
+function(token, user);
+```
+The two optional parameters get you access to the user’s token and other information as provided by the API.
+
+The `user` object has the following properties:
+
+- `admin` (boolean)
+- `email` (string)
+- `id` (number)
+- `por_manager` (boolean)
+- `preferences` (array)
+- `resettable_password` (boolean)
+- `search_favorites` (array)
+- `subscriber_id` (number)
+
+Use `token` to authenticate all requests your application is making to the Travel Intelligence API by adding a custom request header following this format (replace `<the-token>` with the value of the `token` parameter):
+```
+Authorization: Token <the-token>
+```
+
+Example:
+```javascript
+TiAuth.initialize(function(token, user) {
+  // Bootstrap and start your application here.
+  // See below for framework-specific examples.
+});
+```
+
+
 ## Framework Integration
-`ti-auth.js` is build to be independent from any specific framework. This enables either a stand-alone use or the integration with common JavaScript frameworks.
+`ti-auth.js` does not have any dependencies and works completely independent from frameworks and libraries. At the same time it allows for seamless integration with any framework you may choose for your module. In this section you can find some example implementations for a few popular frameworks.
 
 ### Ember
 
-The initialization can be done in ember by creating a custom initializer.
+The initialization can be done in Ember by creating a custom initializer.
 
 1. Import `ti-auth.js` in `ember-cli-build.js`:
  
   ```javascript
-  app.import('bower_components/ti-auth.js/dist/ti-auth.min.js');
+  app.import('path/to/your/ti-auth.js');
   ```
-2. Create `app/initializers/ti-auth.js` with the following content:
-  ```javascript
-  import Ember from 'ember';
 
-  var TiAuthInitializer = {
-    name: 'waitForTiAuth',
-    initialize: function(registry, application) {
+2. Use Ember-CLI to Create an initializer for ti-auth:
 
-      application.deferReadiness();
+        $ ember generate instance-initializer ti-auth 
 
-      TiAuth.API_URL = 'https://staging-api.travel-intelligence.com';
-      TiAuth.DASHBOARD_URL = 'http://travel-intelligence.dev';
+    Edit `app/initializers/ti-auth.js` with the following content:
 
-      TiAuth.initialize(function(token, user) {
-        application.set('token', token);
-        application.advanceReadiness();
-      });
-    }
-  };
+    ```javascript
+    import Ember from 'ember';
 
-  export
-  default TiAuthInitializer;
-  ```
-3. Import the initializer in the header of `app/app.js`:
+    export default {
+      name: 'waitForTiAuth',
+      initialize: function(application) {
 
-  ```javascript
-  import TiAuthInitializer from './initializers/ti-auth';
-  ```
-  .. and load it with the other modules:
-  ```javascript
-  loadInitializers(App, config.modulePrefix, TiAuthInitializer);
-  ```
+        application.deferReadiness();
+
+        TiAuth.API_URL = 'https://api.travel-intelligence.com';
+        TiAuth.DASHBOARD_URL = 'http://travel-intelligence.com';
+
+        TiAuth.initialize(function(token, user) {
+          application.set('token', token);
+          application.advanceReadiness();
+        });
+      }
+    };
+    ```
 
 ### Angular
 
 1. Remove the `ng-app` attribute from the page root element.
 
-2. Manually bootstrap the angular app in the call-back after initializing `ti-auth.js`.   
+2. Manually bootstrap the angular app in the callback after initializing `ti-auth.js`.
 
   ```javascript
   //configuration of the angular application
@@ -136,13 +177,18 @@ Install the required dependencies:
 
     $ make
 
+or use
 
----
+    $ make watch
+
+to automatically watch for file changes and re-build the library.
+
+
 ## Author
-Joschka Kintscher
+[Joschka Kintscher](https://github.com/jkintscher)
 
 ## MIT License
-Copyright (c) 2011 by Brian Noguchi
+Copyright (c) 2016 by Amadeus IT Group SA
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
