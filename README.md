@@ -247,6 +247,21 @@ To create a distributable file (that includes all modules and exposes the
 $ make dist
 ```
 
+## FAQ
+
+##### Why don’t you return a Promise instead of using a callback for `initialize`?
+
+TiAuth is intended to be as portable and independent as possible. While Promises
+already have [great browser support](http://caniuse.com/#feat=promises) they are
+not the safest bet. Since some modules need to support older browsers (namely
+IE) and any polyfill would add significant overhead to the library’s file size,
+a callback is the best solution for now.
+
+##### Why do you use `url-parse` as a dependency instead of using `window.URL`?
+
+Because of [browser support](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL#Browser_compatibility).
+For a more detailed explanation, see the previous question.
+
 ## Author
 
 [Joschka Kintscher](https://github.com/jkintscher)
