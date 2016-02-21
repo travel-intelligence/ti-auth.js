@@ -122,6 +122,34 @@ TiAuth.initialize(function(token, user) {
 });
 ```
 
+### `loadGrants` *(callback)*
+
+This method allows you to load the grants information for the current user. See
+the API documentation of the TI API for further information about the endpoint.
+In general this data should be used to restrict the UI and functionality of your
+module according to the current user’s access rights.
+The callback you provide is called after successfully loading the grants from
+the API and should have the following signature:
+
+```javascript
+function(grants);
+```
+
+The optional parameter gets you access to the user’s grants array (as returned
+from the API).
+
+Example:
+
+```javascript
+TiAuth.loadGrants(function(grants) {
+  // Use the grants information to restrict the UI of your module
+});
+```
+
+*Note:* Only the `controls` portion of the API response is passed to the
+callback. The other information, `user` and `admin`, is stripped as it’s already
+part of the second argument passed to `TiAuth.initialize`.
+
 ## Framework Integration
 
 `ti-auth.js` does not have any dependencies and works completely independently
