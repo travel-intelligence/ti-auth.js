@@ -8,6 +8,8 @@ import Authentication from '../src/lib/authentication';
 import API from '../src/lib/api';
 import Location from '../src/lib/location';
 
+const noop = function() {};
+
 describe('TiAuth', () => {
   beforeEach(function() {
     if (!global.location) {
@@ -34,51 +36,46 @@ describe('TiAuth', () => {
    it('attempts to authorize the user', test(function() {
      this.stub(Authentication, 'authorize', () => true);
      this.stub(API, 'get');
-     TiAuth.initialize(function() {});
+     TiAuth.initialize(noop);
    }));
 
     it('unauthorizes if authorization failed', test(function() {
       this.stub(Authentication, 'authorize', false);
-      var stub = spy();
+      const stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.initialize(function() {});
+      TiAuth.initialize(noop);
       assert.calledOnce(stub);
     }));
 
-    it('loads user from API', test(function() {
+    it('makes correct request to API', test(function() {
       this.stub(Authentication, 'authorize', () => true);
       this.mock(API).expects('get').withArgs('https://api.test/api/v1/users/me');
-      TiAuth.initialize(function() {});
+      TiAuth.initialize(noop);
     }));
 
     it('unauthorizes if request to API failed', test(function() {
       this.stub(Authentication, 'authorize', () => true);
-      this.stub(API, 'get', function(url, success, error) {
-        error('Nope.');
-      });
-      var stub = spy();
+      this.stub(API, 'get', (url, _, error) => { error('Nope.'); });
+      const stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
-      TiAuth.initialize(function() {});
+      TiAuth.initialize(noop);
       assert.calledOnce(stub);
     }));
 
     it('resolves with token and user object on success', test(function() {
-      var user = { name: 'Joschka' };
+      const user = { name: 'Joschka' };
+      const stub = spy();
       this.stub(Authentication, 'authorize', () => true);
       this.stub(Authentication, 'token', () => 'secret');
-      this.stub(API, 'get', function(url, success, error) {
-        success(user);
-      });
-      TiAuth.initialize(function() {
-        expect(arguments[0]).to.equal('secret');
-        expect(arguments[1]).to.equal(user);
-      });
+      this.stub(API, 'get', (url, success, error) => { success(user); });
+      TiAuth.initialize(stub);
+      stub.calledWith('secret', user);
     }));
   });
 
   describe('#reauthorize', () => {
     it('delegates to Authentication#unauthorize', test(function() {
-      var stub = spy();
+      const stub = spy();
       this.stub(Authentication, 'unauthorize', stub);
       TiAuth.reauthorize();
       assert.calledOnce(stub);
@@ -88,7 +85,7 @@ describe('TiAuth', () => {
   describe('#signout', () => {
     it('redirects to Dashboard/unauthorize', test(function() {
       TiAuth.DASHBOARD_URL = '://dashboard.com';
-      var stub = spy();
+      const stub = spy();
       this.stub(Location, 'redirect', stub);
       TiAuth.signout();
       assert.calledWith(stub, '://dashboard.com/unauthorize');
