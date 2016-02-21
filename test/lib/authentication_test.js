@@ -28,8 +28,8 @@ describe('Authentication', () => {
     }));
 
     it('removes auth_token param from URL without modifying history', test(function() {
-      let url = { hostname: 'foo.bar',
-                  query: { auth_token: 'secret', foo: 'bar' } };
+      const url = { hostname: 'foo.bar',
+                    query: { auth_token: 'secret', foo: 'bar' } };
       this.stub(location, 'parse').returns(url);
       this.mock(location).expects('replace')
                          .withExactArgs({ hostname: 'foo.bar',
@@ -63,7 +63,7 @@ describe('Authentication', () => {
     }));
 
     it('stores successfully extracted auth token', test(function() {
-      let url = { query: { auth_token: 'secret'} };
+      const url = { query: { auth_token: 'secret'} };
       this.stub(location, 'parse').returns(url);
       this.stub(location, 'replace');
       Authentication.authorize();
