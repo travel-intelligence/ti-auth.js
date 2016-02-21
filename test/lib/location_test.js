@@ -15,14 +15,14 @@ describe('Location', () => {
 
   describe('#parse', () => {
     it('parses the URL', test(function() {
-      let result = location.parse();
+      const result = location.parse();
       expect(result instanceof URL).to.be.true;
     }));
   });
 
   describe('#replace', () => {
     it('changes URL without modifying history', test(function() {
-      let target = 'safe://foo.bar';
+      const target = 'safe://foo.bar';
       this.mock(global.history).expects('replaceState')
                                .withExactArgs({}, '', target);
       location.replace(target);
