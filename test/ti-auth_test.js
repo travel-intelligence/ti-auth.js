@@ -73,6 +73,39 @@ describe('TiAuth', () => {
     }));
   });
 
+  describe('#loadGrants', () => {
+    it('makes correct request to API', test(function() {
+      this.mock(API).expects('get').withArgs('https://api.test/api/v1/grants');
+      TiAuth.loadGrants(noop);
+    }));
+
+    it('resolves with parsed Grants on success', test(function() {
+      const api_mock = {
+        grants: [{
+          user: 'foo@bar.com',
+          admin: true,
+          controls: [{
+            oneThing: true
+          }, {
+            andAnother: false
+          }]
+        }]
+      };
+      const stub = spy();
+      this.stub(API, 'get', (url, success) => { success(api_mock); });
+      TiAuth.loadGrants(stub);
+      assert.calledWith(stub, api_mock.grants[0].controls);
+    }));
+
+    it('unauthorizes if request to API failed', test(function() {
+      this.stub(API, 'get', (url, _, error) => { error('Nope.'); });
+      const stub = spy();
+      this.stub(Authentication, 'unauthorize', stub);
+      TiAuth.loadGrants();
+      assert.calledOnce(stub);
+    }));
+  });
+
   describe('#reauthorize', () => {
     it('delegates to Authentication#unauthorize', test(function() {
       const stub = spy();

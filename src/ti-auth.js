@@ -31,6 +31,12 @@ const TiAuth = {
     }
     retrieve_user(resolve);
   },
+  loadGrants(resolve) {
+    API.get(TiAuth.API_URL + '/api/v1/grants',
+      (response) => { resolve.call(null, response.grants[0].controls); },
+      Auth.unauthorize
+    );
+  },
   reauthorize() {
     Auth.unauthorize();
   },
