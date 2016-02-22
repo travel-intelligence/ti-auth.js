@@ -125,7 +125,9 @@ TiAuth.initialize(function(token, user) {
 ### `loadGrants` *(callback)*
 
 This method allows you to load the grants information for the current user. See
-the API documentation of the TI API for further information about the endpoint.
+the [API documentation](http://wiki.travel-intelligence.com/wiki/User_Access_
+Control_for_Travel_Intelligence_Portal#Grants_Web_Service) of the TI API for 
+further information about the endpoint.
 In general this data should be used to restrict the UI and functionality of your
 module according to the current user’s access rights.
 The callback you provide is called after successfully loading the grants from
