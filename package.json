@@ -8,16 +8,16 @@
   "dependencies": {},
   "devDependencies": {
     "babel": "5.8.23",
-    "browserify": "11.1.0",
+    "browserify": "^16.5.1",
     "chai": "3.2.0",
-    "chokidar-cli": "1.0.1",
-    "mocha": "2.3.2",
+    "chokidar-cli": "^2.1.0",
+    "mocha": "^7.2.0",
     "sinon": "1.16.1",
-    "testem": "0.9.5",
+    "testem": "^3.1.0",
     "uglifyjs": "2.4.10",
-    "url-parse": "1.0.5"
+    "url-parse": ">=1.4.7"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "git@github.com:travel-intelligence/ti-auth.js.git"
   },
