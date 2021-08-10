@@ -18,7 +18,7 @@
     "uglifyjs": ">=2.4.11",
     "url-parse": ">=1.4.7",
     "ws": "~> 7.4.6",
-    "xmldom": ">=0.5.0"
+    "xmldom": "~> 0.6.0"
   },
   "repository": {
     "type": "git",
